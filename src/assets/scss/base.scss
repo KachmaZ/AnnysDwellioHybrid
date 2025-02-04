@@ -1,0 +1,40 @@
+/* color palette from <https://github.com/vuejs/theme> */
+
+$white: #ffffff;
+$grey-5: #e7e7ee;
+$grey-10: #d3d3d8;
+$grey-30: #a8a8b3;
+$grey-50: #7f808f;
+$grey-70: #595a6c;
+$grey-90: #353a4c;
+
+$black: #1d2337;
+
+$primary: #4968d4;
+$hover: #5d7ae4;
+$pressed: #3d5ac2;
+$light-hover: #e4e9ff;
+$light-pressed: #d5ddff;
+$outline: #afbef9;
+
+/* semantic color variables for this project */
+
+// $color-background: $white;
+// $color-background-soft: $white-soft;
+// $color-background-mute: $white-mute;
+
+// $color-border: $divider-light-2;
+// $color-border-hover: $divider-light-1;
+
+// $color-heading: $text-light-1;
+// $color-text: $text-light-1;
+
+// $section-gap: 160px;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}

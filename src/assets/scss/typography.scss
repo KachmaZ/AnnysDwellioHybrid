@@ -1,0 +1,61 @@
+@font-face {
+  font-family: 'Golos Text';
+  src: url(./fonts/Golos_Text/GolosText-VariableFont_wght.ttf);
+}
+
+*,
+*::before,
+*::after {
+  font-family: 'Golos Text';
+}
+
+.h {
+  &1 {
+    font-size: 46px;
+    font-weight: 500;
+    line-height: 56px;
+  }
+  &2 {
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 48px;
+  }
+  &3 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 38px;
+  }
+  &4 {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 34px;
+  }
+  &5 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+  }
+  &6 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+}
+
+.text {
+  &-28 {
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+  &-20 {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+  &-label {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+  }
+}
