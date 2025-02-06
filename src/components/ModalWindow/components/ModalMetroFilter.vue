@@ -1,5 +1,8 @@
 <template>
   <div class="metro-filter">
+    <div class="metro-filter__close" @click.stop="closeModal()">
+      <img :src="crossSrc" />
+    </div>
     <div class="metro-filter__lines">
       <div v-for="(line, index) in metroMap" class="line" :key="index">
         <div class="line__title">
@@ -25,12 +28,16 @@
 <script setup lang="ts">
 import { useFiltersStore } from '@/stores/filtersStore'
 import { storeToRefs } from 'pinia'
+import crossSrc from '@/assets/img/icons/cross.svg'
+import { useModalStore } from '@/stores/modalStore'
 
 type metroLine = {
   lineName: string
   lineColor: string
   stations: string[]
 }
+
+const { closeModal } = useModalStore()
 
 const metroMap: metroLine[] = [
   {
@@ -105,13 +112,33 @@ const { addCheckValue } = filterStore
 .metro-filter {
   width: 1450px;
   height: 665px;
+  position: relative;
 
-  padding: 80px 100px;
+  padding: 80px 50px 80px 100px;
 
   input[type='checkbox'] {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+  }
+
+  &__close {
+    width: 24px;
+    height: 24px;
+
+    position: absolute;
+    top: 40px;
+    right: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    &:hover {
+      background-color: $light-hover;
+    }
   }
 
   &__lines {
@@ -131,6 +158,7 @@ const { addCheckValue } = filterStore
         display: flex;
         align-items: center;
         margin-bottom: 12px;
+        white-space: nowrap;
 
         &--mark {
           width: 20px;

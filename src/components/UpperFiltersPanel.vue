@@ -3,7 +3,7 @@
     <UIButton variant="secondary" :icon="filterIcon" @click="() => openModal(ModalFilters)">
       Фильтры
     </UIButton>
-    <UISelect :options="apartOptions" v-model="filterValues.apartType" />
+    <UISelect :options="apartOptions" v-model="filterValues.apartType" style="min-width: 205px" />
     <div class="upper-filter__rooms">
       <UIChoiceChip
         v-model="filterValues.rooms"
@@ -50,7 +50,7 @@
         >4+</UIChoiceChip
       >
     </div>
-    <div class="" style="display: flex; align-items: center; gap: 10px">
+    <div class="" style="display: flex; align-items: center; gap: 10px; white-space: nowrap">
       Цена от
       <UIInput v-model="filterValues.priceMin" type="number" variant="price" />
       до

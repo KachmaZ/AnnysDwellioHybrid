@@ -1,9 +1,12 @@
 <template>
   <div class="home-filter">
-    <div class="home-filter__tabs">Купить Снять</div>
     <div class="home-filter__wrapper">
       <div class="home-filter__row">
-        <UISelect :options="apartOptions" v-model="filterValues.apartType" />
+        <UISelect
+          class="apart-type-select"
+          :options="apartOptions"
+          v-model="filterValues.apartType"
+        />
         <div class="home-filter__rooms">
           <UIChoiceChip
             variant="primary"
@@ -48,26 +51,30 @@
             >4+</UIChoiceChip
           >
         </div>
-        <div class="" style="display: flex; align-items: center; gap: 10px">
+        <div
+          class=""
+          style="display: inline-flex; align-items: center; gap: 10px; white-space: nowrap"
+        >
           Цена от
           <UIInput v-model="filterValues.priceMin" type="number" variant="price" />
           до
           <UIInput v-model="filterValues.priceMax" type="number" variant="price" />
         </div>
-
-        <UIButton variant="primary" @click="router.push({ name: 'hybridPage' })">Найти</UIButton>
       </div>
       <div class="home-filter__row">
-        <UISelect :options="cityOptions" v-model="filterValues.city" />
+        <UISelect class="city-select" :options="cityOptions" v-model="filterValues.city" />
         <UIButtonMark :mark-value="filterValues.metro.length" @click="openModal(ModalMetroFilter)">
           Метро
         </UIButtonMark>
         <UIButtonMark>Район</UIButtonMark>
-        <UIInput variant="search" :placeholder="'Адрес, ЖК'" />
-        <UIButton variant="secondary" @click="router.push({ name: 'map' })" style="display: none"
-          >На карте</UIButton
-        >
+        <UIInput variant="search" :placeholder="'Адрес, ЖК'" style="width: 100%" />
       </div>
+    </div>
+    <div class="home-filter__controls">
+      <UIButton variant="primary" @click="router.push({ name: 'hybridPage' })">Найти</UIButton>
+      <UIButton v-show="false" variant="secondary" @click="router.push({ name: 'map' })"
+        >На карте</UIButton
+      >
     </div>
   </div>
 </template>
@@ -108,7 +115,11 @@ const addCheckValue = (filterField: string, newValue: string) => {
 <style scoped lang="scss">
 .home-filter {
   width: 1310px;
-  padding: 50px 70px 50px;
+  padding: 50px 50px 70px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 70px;
 
   background-color: $white;
 
@@ -124,6 +135,15 @@ const addCheckValue = (filterField: string, newValue: string) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
+
+    .apart-type-select {
+      min-width: 200px;
+    }
+
+    .city-select {
+      min-width: 270px;
+    }
   }
 
   &__rooms {
@@ -134,6 +154,13 @@ const addCheckValue = (filterField: string, newValue: string) => {
 
     border: 2px solid $primary;
     border-radius: 25px;
+  }
+
+  &__controls {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 }
 </style>

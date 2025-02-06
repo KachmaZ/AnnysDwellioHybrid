@@ -50,11 +50,14 @@ import searchIcon from '@/assets/img/icons/search.svg'
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 100px;
   }
 
   &__nav {
+    width: 100%;
     display: flex;
-    gap: 50px;
+    justify-content: space-between;
+    gap: 15px;
 
     &-link {
       text-decoration: none;
@@ -73,6 +76,7 @@ import searchIcon from '@/assets/img/icons/search.svg'
   }
 
   &__controls {
+    min-width: 730px;
     display: flex;
     gap: 12px;
   }

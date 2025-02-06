@@ -1,5 +1,8 @@
 <template>
   <div class="modal-filters">
+    <div class="modal-filters__close" @click.stop="closeModal()">
+      <img :src="crossSrc" />
+    </div>
     <div class="modal-filters__wrapper" @scroll.stop>
       <div class="modal-filters__apart">
         <h5 class="h5">Квартира</h5>
@@ -130,14 +133,22 @@
         </div>
       </div>
     </div>
+    <UIButton class="modal-filters__save" variant="primary" @click.stop="closeModal()"
+      >Сохранить</UIButton
+    >
   </div>
 </template>
 
 <script setup lang="ts">
+import crossSrc from '@/assets/img/icons/cross.svg'
+import UIButton from '@/components/UIKit/UIButton.vue'
 import UIFilterChip from '@/components/UIKit/UIFilterChip.vue'
 import UIRangeInput from '@/components/UIKit/UIRangeInput.vue'
 import { useFiltersStore } from '@/stores/filtersStore'
+import { useModalStore } from '@/stores/modalStore'
 import { storeToRefs } from 'pinia'
+
+const { closeModal } = useModalStore()
 
 const filtersStore = useFiltersStore()
 const { addCheckValue } = filtersStore
@@ -176,6 +187,27 @@ const setMetroDistance = (newValue: number) => {
   width: 1720px;
   height: 825px;
   padding: 70px 78px 130px;
+  position: relative;
+
+  &__close {
+    width: 24px;
+    height: 24px;
+
+    position: absolute;
+    top: 40px;
+    right: 73px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    &:hover {
+      background-color: $light-hover;
+    }
+  }
+
   &__apart,
   &__house,
   &__env {
@@ -206,6 +238,12 @@ const setMetroDistance = (newValue: number) => {
         gap: 10px;
       }
     }
+  }
+
+  &__save {
+    position: absolute;
+    bottom: 50px;
+    right: 75px;
   }
 }
 </style>

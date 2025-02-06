@@ -11,7 +11,7 @@
   </div>
   <div class="hybrid-page--content">
     <div class="list"><ApartsList /></div>
-    <div class="map"><ApartsMap /></div>
+    <div class="map"><ApartsMap class="map__hybrid" /></div>
   </div>
 </template>
 
@@ -37,6 +37,12 @@ const currentContent = shallowRef(ApartsList)
     .list,
     .map {
       width: 50%;
+      position: relative;
+
+      &__hybrid {
+        position: sticky;
+        top: 20px;
+      }
     }
   }
 }
