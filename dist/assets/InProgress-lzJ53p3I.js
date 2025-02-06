@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as c}from"./index-BmU1AWFv.js";const s={},n={style:{width:"100%",display:"flex","justify-content":"center"}};function o(r,_){return c(),t("div",n,"¯\\_(ツ)_/¯")}const f=e(s,[["render",o]]);export{f as default};
