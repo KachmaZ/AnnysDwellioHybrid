@@ -11,24 +11,30 @@
           <h6 class="h6 line__title--text">{{ line.lineName }}</h6>
         </div>
         <div class="line__stations">
-          <div class="station" v-for="(station, index) in line.stations" :key="index">
-            <input
-              type="checkbox"
-              :checked="filterValues.metro.includes(station)"
-              @click="() => addCheckValue('metro', station)"
-            />
+          <div
+            class="station"
+            v-for="(station, index) in line.stations"
+            :key="index"
+            @click="() => addCheckValue('metro', station)"
+          >
+            <input type="checkbox" :checked="filterValues.metro.includes(station)" />
             <span class="text-20">{{ station }}</span>
           </div>
         </div>
       </div>
     </div>
+
+    <UIButton class="metro-filter__save" variant="primary" @click.stop="closeModal()"
+      >Сохранить</UIButton
+    >
   </div>
 </template>
 
 <script setup lang="ts">
 import { useFiltersStore } from '@/stores/filtersStore'
-import { storeToRefs } from 'pinia'
 import crossSrc from '@/assets/img/icons/cross.svg'
+import UIButton from '@/components/UIKit/UIButton.vue'
+import { storeToRefs } from 'pinia'
 import { useModalStore } from '@/stores/modalStore'
 
 type metroLine = {
@@ -172,6 +178,12 @@ const { addCheckValue } = filterStore
         margin-left: 32px;
       }
     }
+  }
+
+  &__save {
+    position: absolute;
+    bottom: 30px;
+    right: 50px;
   }
 }
 </style>
