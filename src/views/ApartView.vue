@@ -1,7 +1,14 @@
 <template>
   <div class="apart-page">
     <div class="apart-page__image">
-      <img :src="imageUrl" alt="" />
+      <Swiper :slides-per-view="'auto'" :space-between="50">
+        <SwiperSlide v-for="imageUrl in images" :key="imageUrl">
+          <img :src="imageUrl" alt=""
+        /></SwiperSlide>
+
+        <SliderControls :icon="leftChevronSrc" direction="left" />
+        <SliderControls :icon="rightChevronSrc" direction="right" />
+      </Swiper>
     </div>
     <div class="apart-page__main-info">
       <div class="head">
@@ -89,6 +96,9 @@
 </template>
 
 <script setup lang="ts">
+// Import Swiper styles
+import 'swiper/css'
+
 import type { ApartType } from '@/entities/apart'
 import router from '@/router'
 import { useApartsStore } from '@/stores/apartsStore'
@@ -100,17 +110,25 @@ import markerSrc from '@/assets/img/icons/marker.svg'
 import subwaySrc from '@/assets/img/icons/subway.svg'
 import pedestrianSrc from '@/assets/img/icons/pedestrian.svg'
 import transportSrc from '@/assets/img/icons/transport.svg'
+import leftChevronSrc from '@/assets/img/icons/chevronLeft.svg'
+import rightChevronSrc from '@/assets/img/icons/chevronRight.svg'
 import UIButton from '@/components/UIKit/UIButton.vue'
 import { useModalStore } from '@/stores/modalStore'
 import ModalLeaveContacts from '@/components/ModalWindow/components/ModalLeaveContacts.vue'
+
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import SliderControls from '@/components/SliderControls.vue'
 
 const route = useRoute()
 
 const apart = ref<ApartType>(<ApartType>{})
 
-const imageUrl = computed(
-  () => new URL(`../assets/img/aparts/${apart.value.images[0]}`, import.meta.url).href,
-)
+const images = computed<string[]>(() => {
+  return apart.value.images.map((image) => {
+    return new URL(`../assets/img/aparts/${image}`, import.meta.url).href
+  }, [])
+})
 
 const { openModal } = useModalStore()
 
@@ -143,15 +161,23 @@ onBeforeMount(() => {
 .apart-page {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
   grid-template-areas:
-    'image main-info'
-    'about-part about-house';
+    'image mainInfo'
+    'aboutApart aboutHouse';
   column-gap: 30px;
   row-gap: 120px;
 
   &__image {
-    grid-area: 'image';
+    grid-area: image;
+    position: relative;
+
+    .swiper {
+      width: 100%;
+      &-slide {
+        // width: fit-content !important;
+      }
+    }
 
     img {
       width: 100%;
@@ -159,14 +185,29 @@ onBeforeMount(() => {
 
       border-radius: 40px;
     }
+
+    .left,
+    .right {
+      position: absolute;
+      bottom: 40px;
+      z-index: 1;
+
+      &.left {
+        left: 45px;
+      }
+
+      &.right {
+        right: 45px;
+      }
+    }
   }
 
   &__main-info {
-    grid-area: 'main-info';
+    grid-area: mainInfo;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 32px;
 
     .head {
       &__title {
@@ -229,11 +270,11 @@ onBeforeMount(() => {
   }
 
   &__about-apart {
-    grid-area: 'about-apart';
+    grid-area: aboutApart;
   }
 
   &__about-house {
-    grid-area: 'about-house';
+    grid-area: aboutHouse;
   }
 }
 

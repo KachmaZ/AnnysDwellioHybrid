@@ -58,7 +58,7 @@ const props = defineProps<UIButtonProps>()
   }
 
   &--tertiary {
-    background-color: transparent;
+    background-color: $white;
     color: $primary;
 
     &:hover {
